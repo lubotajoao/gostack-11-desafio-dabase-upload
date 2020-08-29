@@ -4,7 +4,11 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
+
+import Category from './Category';
 
 @Entity('transactions')
 class Transaction {
@@ -15,12 +19,13 @@ class Transaction {
   title: string;
 
   @Column()
-  value: number;
-
-  @Column()
   type: 'income' | 'outcome';
 
-  @Column()
+  @Column('decimal')
+  value: number;
+
+  @ManyToOne(() => Category)          // Sempre deve ser a model referenciado
+  @JoinColumn({name: 'category_id'})  // Qual é a coluna referenciada
   category_id: string;
 
   @CreateDateColumn()
