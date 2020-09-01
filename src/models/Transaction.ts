@@ -24,9 +24,12 @@ class Transaction {
   @Column('decimal')
   value: number;
 
-  @ManyToOne(() => Category)          // Sempre deve ser a model referenciado
-  @JoinColumn({name: 'category_id'})  // Qual é a coluna referenciada
+  @Column()
   category_id: string;
+
+  @ManyToOne(() => Category)           // Sempre deve ser a model referenciado
+  @JoinColumn({name: 'category_id'})     // Qual é a coluna referenciada
+  category: Category;
 
   @CreateDateColumn()
   created_at: Date;
